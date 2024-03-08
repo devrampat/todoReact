@@ -1,0 +1,25 @@
+/**
+ * TODO App
+ * 
+ 
+ * Display a list of tasks.
+ * Add a new task.
+ * Mark a task as completed.
+ * Delete a task.
+ * 
+ * we'll cover essential React concepts, including components, state management, 
+ * props, event handling, and styling.
+ * localstorage
+ * html5 web apis
+ */
+
+ Tasks:
+ 
+ 1. Add a new task
+ 2. Display the list of tasks.
+ 3. List should get updated once we add/remove a task.
+ 4. Task should be editable and can be deleted.
+ 5. Mark a task as complete (add some CSS(strikethrough the completed task.))
+ 6. Options to Remove all tasks.
+ 7. Filter to filter completed and show all tasks.
+

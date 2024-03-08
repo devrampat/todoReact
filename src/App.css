@@ -1,38 +1,84 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: 'Poppins', 'Courier';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+  font-size: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.app-title {
+  font-size: 2rem;
+  color:blueviolet;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.app-task-input-container {
+  background-color: rgb(241, 241, 245);
+  border: 1px dashed;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-task-container {
+  margin-top: 2rem;
+  background-color: rgb(241, 241, 245);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 50%;
+  display: grid;
+  gap: 1rem;
+}
+
+.todo-item-card {
+  background-color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  align-items: center;
+}
+
+.btn {
+  margin: 0 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.iconBtn {
+  color: rebeccapurple;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 1.5rem;
+}
+
+.customInput {
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid blue;
+  width: 30rem;
 }
