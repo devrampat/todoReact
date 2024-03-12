@@ -12,7 +12,8 @@ const App = () => {
   const addTask = () => {
     const newTask = {
       name: taskName,
-      id: new Date().getTime()
+      id: new Date().getTime(),
+      completed: false
     }
 
     const updatedList = [...taskList, newTask];
@@ -24,17 +25,8 @@ const App = () => {
   }
 
   const updateTask = () => {
-    // console.log("taskList", taskList)
-    // console.log("activeItem", activeItem);
-    // console.log("taskName", taskName);
-
    const newList = [...taskList].map((taskItem) => {
       if(taskItem.id === activeItem.id) {
-        // we will return the updated item
-        // return {
-        //   name: taskName,
-        //   id: taskItem.id
-        // }
         return Object.assign({}, taskItem, {
           name: taskName
         })
@@ -60,19 +52,55 @@ const App = () => {
     setToggleAdd(true);
     setActiveItem(itemToEdit);
   }
+
+  const removeAllTasks = () => {
+    console.log(taskList);
+    if(taskList.length) {
+      setTaskList([]);
+    }
+  }
+
+  const markAsCompleted = (item) => {
+    //update the task list array
+    const newList = [...taskList].map((taskItem) => {
+      if(taskItem.id === item.id) {
+        return Object.assign({}, taskItem, {
+          completed: true
+        })
+      }
+      return taskItem;
+   })
+
+   setTaskList(newList);
+  }
+
+  const onFilter = (e) => {
+    const filterStr = e.target.value;
+    if(filterStr === 'Completed') {
+
+    } else {
+      
+    }
+  }
   
   return (
     <div className="app">
       <div className="app-title">TODO Application</div>
       <div className="app-task-input-container">
         <input className="customInput" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)}/>
+        
         {
           !toggleAdd ?
-          <button className="btn" onClick={addTask}><i class="fa-solid fa-plus iconBtn"/></button>
+          <button className="btn" onClick={addTask}><i className="fa-solid fa-plus iconBtn"/></button>
           :
-          <button className="btn" onClick={updateTask}><i class="fa-regular fa-pen-to-square iconBtn"/></button>
+          <button className="btn" onClick={updateTask}><i className="fa-regular fa-pen-to-square iconBtn"/></button>
         }
+        
       </div>
+      <select onChange={onFilter}>
+          <option>ALL</option>
+          <option>Completed</option>
+        </select>
       <div className="app-task-container">
         {
           taskList.length ? taskList.map((item) => {
@@ -82,6 +110,7 @@ const App = () => {
                 item={item} 
                 removeTodoItem={removeItem}
                 editTodoItem={onEditItem}
+                onMarkItemComplete={markAsCompleted}
               />
             )
           })
@@ -89,6 +118,7 @@ const App = () => {
           <div>{'No new tasks to be done.'}</div>
         }
       </div>
+      {taskList.length ? <button className="btn removeBtn" onClick={removeAllTasks}>Remove All</button> : null}
     </div>
   );
 }

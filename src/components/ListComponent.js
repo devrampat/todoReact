@@ -19,7 +19,6 @@ function ListComponent() {
     let itemToRemove = updatedList.findIndex((item) => item.id === user.id)
     updatedList.splice(itemToRemove, 1);
     setUserList(updatedList)
-    
   }
 
   return (

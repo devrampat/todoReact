@@ -68,12 +68,20 @@ html {
   border: none;
   border-radius: 0.5rem;
 }
+.removeBtn {
+  margin: 10px;
+  padding: 10px;
+  background: aquamarine;
+}
 
 .iconBtn {
   color: rebeccapurple;
   cursor: pointer;
   font-weight: bold;
   margin-left: 1.5rem;
+      margin: 10px;
+    padding: 10px;
+    background: aquamarine;
 }
 
 .customInput {
@@ -81,4 +89,8 @@ html {
   border-radius: 0.5rem;
   border: 1px solid blue;
   width: 30rem;
+}
+
+.complete {
+  text-decoration: line-through;
 }
