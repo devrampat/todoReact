@@ -7,6 +7,7 @@ import TodoContext from "../context/TodoContext";
 function TodoContainer() {
   const { taskName, setTaskName } = useContext(TodoContext);
   const [taskList, setTaskList] = useState([]);
+  const [originalTaskList, setOriginalTaskList] = useState([]);
   const [toggleAdd, setToggleAdd] = useState(false);
   const [activeItem, setActiveItem] = useState();
 
@@ -20,6 +21,7 @@ function TodoContainer() {
     const updatedList = [...taskList, newTask];
 
     setTaskList(updatedList);
+    setOriginalTaskList(updatedList)
 
     //Clear input
     setTaskName("");
@@ -36,6 +38,7 @@ function TodoContainer() {
     });
 
     setTaskList(newList);
+    setOriginalTaskList(newList)
     setTaskName("");
     setToggleAdd(false);
   };
@@ -46,6 +49,7 @@ function TodoContainer() {
     });
 
     setTaskList(newList);
+    setOriginalTaskList(newList)
   };
 
   const onEditItem = (itemToEdit) => {
@@ -73,14 +77,23 @@ function TodoContainer() {
     });
 
     setTaskList(newList);
+    setOriginalTaskList(newList);
   };
 
   const onFilter = (e) => {
     const filterStr = e.target.value;
+    let newList = [...taskList];
+    console.log(taskList)
     if (filterStr === "Completed") {
+      newList = [...newList].filter((item) => {
+        return item.completed;
+      });
     } else {
+      newList = [...originalTaskList];
     }
+    setTaskList(newList);
   };
+
   return (
     <>
       <div className="app-title">TODO Application</div>
