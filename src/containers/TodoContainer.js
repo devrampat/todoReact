@@ -7,6 +7,7 @@ import TodoContext from "../context/TodoContext";
 function TodoContainer() {
   const { taskName, setTaskName } = useContext(TodoContext);
   const [taskList, setTaskList] = useState([]);
+  const [originalTaskList, setOriginalTaskList] = useState([]);
   const [toggleAdd, setToggleAdd] = useState(false);
   const [activeItem, setActiveItem] = useState();
 
@@ -20,32 +21,36 @@ function TodoContainer() {
     const updatedList = [...taskList, newTask];
 
     setTaskList(updatedList);
+    setOriginalTaskList(updatedList);
 
-    //Clear input
+    // Clear input
     setTaskName("");
   };
 
   const updateTask = () => {
-    const newList = [...taskList].map((taskItem) => {
+    const newList = taskList.map((taskItem) => {
       if (taskItem.id === activeItem.id) {
-        return Object.assign({}, taskItem, {
+        return {
+          ...taskItem,
           name: taskName,
-        });
+        };
       }
       return taskItem;
     });
 
     setTaskList(newList);
+    setOriginalTaskList(newList);
     setTaskName("");
     setToggleAdd(false);
   };
 
   const removeItem = (itemToRemove) => {
-    const newList = [...taskList].filter((item) => {
+    const newList = taskList.filter((item) => {
       return item.id !== itemToRemove.id;
     });
 
     setTaskList(newList);
+    setOriginalTaskList(newList); // Changed 'newlist' to 'newList'
   };
 
   const onEditItem = (itemToEdit) => {
@@ -55,32 +60,40 @@ function TodoContainer() {
   };
 
   const removeAllTasks = () => {
-    console.log(taskList);
     if (taskList.length) {
       setTaskList([]);
+      setOriginalTaskList([]);
     }
   };
 
   const markAsCompleted = (item) => {
-    //update the task list array
-    const newList = [...taskList].map((taskItem) => {
+    const newList = taskList.map((taskItem) => {
       if (taskItem.id === item.id) {
-        return Object.assign({}, taskItem, {
+        return {
+          ...taskItem,
           completed: true,
-        });
+        };
       }
       return taskItem;
     });
 
     setTaskList(newList);
+    setOriginalTaskList(newList);
   };
 
   const onFilter = (e) => {
     const filterStr = e.target.value;
+    let newList = [...originalTaskList]; // Use originalTaskList here
+
     if (filterStr === "Completed") {
-    } else {
+      newList = newList.filter((item) => {
+        return item.completed;
+      });
     }
+
+    setTaskList(newList); // Moved this inside the conditional block
   };
+
   return (
     <>
       <div className="app-title">TODO Application</div>
@@ -129,8 +142,8 @@ function TodoContainer() {
         </button>
       ) : null}
 
-      <ChildComponent1 name={taskName}/>
-      <ChildComponent2/>
+      <ChildComponent1 name={taskName} />
+      <ChildComponent2 />
     </>
   );
 }
